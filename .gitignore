@@ -27,6 +27,7 @@ build/
 !**/tests-gen/**/build
 *.iml
 !**/testData/**/*.iml
+.idea/
 .idea/artifacts
 .idea/remote-targets.xml
 .idea/libraries/Gradle*.xml
