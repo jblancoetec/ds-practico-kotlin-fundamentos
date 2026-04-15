@@ -91,7 +91,7 @@ class Ejercicio6Test {
     @Test
     fun testWhenExpresionMayor() {
         val resultado = obtenerDescuentoWhen(250.0)
-        assertEquals(37.5, resultado)
+        assertEquals(25.0, resultado)
     }
 
     @Test

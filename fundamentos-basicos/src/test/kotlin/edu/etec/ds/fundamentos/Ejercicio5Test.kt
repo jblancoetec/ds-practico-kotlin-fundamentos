@@ -97,7 +97,7 @@ class Ejercicio5Test {
     @Test
     fun testContarVocales() {
         val resultado = contarVocales("Universidad")
-        assertEquals(6, resultado)
+        assertEquals(5, resultado)
     }
 
     @Test
