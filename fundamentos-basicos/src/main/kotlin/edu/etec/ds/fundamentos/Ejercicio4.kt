@@ -13,7 +13,7 @@ fun evaluarEdad(edad: Int): String {
 }
 
 fun obtenerDescuento(monto: Double): Double {
-    TODO("Retornar descuento: 10% si monto > 100, 20% si > 150, 30% si > 200, sino 0%")
+    TODO("Retornar descuento: 10% si monto >= 100, 20% si >= 150, 30% si >= 200, sino 0%")
 }
 
 fun calcular(operador: Char, a: Int, b: Int): Double {
