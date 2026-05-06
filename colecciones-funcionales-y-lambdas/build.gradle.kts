@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.22"
+    kotlin("jvm") version "2.0.21"
 }
 
 group = "com.ds.practico"
@@ -19,7 +19,7 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 tasks.withType<Test> {
