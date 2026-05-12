@@ -13,29 +13,6 @@ import org.junit.jupiter.api.Nested
  * 'it' eficientemente y aplique scope functions para crear código más limpio.
  */
 class Ejercicio5ItScopeFunctionsTest {
-    
-    data class Usuario(
-        var id: Int = 0,
-        var nombre: String = "",
-        var email: String = "",
-        var activo: Boolean = false,
-        var roles: MutableList<String> = mutableListOf(),
-        var configuracion: ConfiguracionUsuario = ConfiguracionUsuario()
-    )
-    
-    data class ConfiguracionUsuario(
-        var tema: String = "claro",
-        var idioma: String = "es",
-        var notificaciones: Boolean = true,
-        var nivelPrivacidad: Int = 1
-    )
-    
-    data class Validacion(
-        val campo: String,
-        val valido: Boolean,
-        val mensaje: String
-    )
-    
     @Nested
     @DisplayName("Parte A: Uso del parámetro implícito 'it'")
     inner class ItParameter {
@@ -76,7 +53,7 @@ class Ejercicio5ItScopeFunctionsTest {
         @DisplayName("Debe encadenar operaciones usando 'it'")
         fun encadenarOperacionesConIt() {
             val builder = UsuarioBuilder()
-            val textos = listOf("  kotlin  ", "JAVA", "  Scala  ", ""]
+            val textos = listOf("  kotlin  ", "JAVA", "  Scala  ", "")
             
             // Limpiar, convertir a minúsculas y filtrar vacíos usando 'it'
             val procesados = builder.procesarTextos(textos)
@@ -209,8 +186,8 @@ class Ejercicio5ItScopeFunctionsTest {
                 email = "invalid-email"
             )
             
-            assertTrue(resultadoExitoso.segundo) // Validación exitosa
-            assertFalse(resultadoFallido.segundo) // Validación fallida
+            assertTrue(resultadoExitoso.second) // Validación exitosa
+            assertFalse(resultadoFallido.second) // Validación fallida
         }
     }
     

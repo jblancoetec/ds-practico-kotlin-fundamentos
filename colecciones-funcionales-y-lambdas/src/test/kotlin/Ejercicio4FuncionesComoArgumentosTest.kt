@@ -14,18 +14,6 @@ import org.junit.jupiter.api.Nested
  */
 class Ejercicio4FuncionesComoArgumentosTest {
     
-    data class Transaccion(
-        val id: String,
-        val monto: Double,
-        val tipo: TipoTransaccion,
-        val categoria: String,
-        val fecha: String, // Formato: "YYYY-MM-DD"
-        val estado: EstadoTransaccion
-    )
-    
-    enum class TipoTransaccion { INGRESO, EGRESO }
-    enum class EstadoTransaccion { PENDIENTE, PROCESADA, RECHAZADA }
-    
     @Nested
     @DisplayName("Parte A: Funciones de Transformación como Parámetros")
     inner class TransformationFunctions {
@@ -284,9 +272,4 @@ class Ejercicio4FuncionesComoArgumentosTest {
         }
     }
     
-    data class ConfiguracionProcesamiento(
-        val filtro: (Transaccion) -> Boolean,
-        val transformacion: (Transaccion) -> Double,
-        val formateo: (Double) -> String
-    )
 }

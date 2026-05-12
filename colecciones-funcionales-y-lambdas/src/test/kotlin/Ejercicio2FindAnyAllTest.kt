@@ -14,20 +14,12 @@ import org.junit.jupiter.api.Nested
  * all para validaciones completas.
  */
 class Ejercicio2FindAnyAllTest {
-    
-    data class Tarea(
-        val id: Int,
-        val titulo: String,
-        val prioridad: Int, // 1 = baja, 2 = media, 3 = alta
-        val completada: Boolean,
-        val etiquetas: List<String>,
-        val tiempoEstimadoHoras: Int
-    )
-    
+
+
     @Nested
     @DisplayName("Parte A: Operaciones con Find")
     inner class FindOperations {
-        
+
         @Test
         @DisplayName("Debe encontrar la primera tarea de alta prioridad")
         fun encontrarPrimeraTareaAltaPrioridad() {
@@ -38,14 +30,14 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(3, "Documentación", 2, true, listOf("docs"), 2),
                 Tarea(4, "Deploy a producción", 3, false, listOf("devops", "urgente"), 3)
             )
-            
+
             val tareaUrgente = gestor.encontrarPrimeraTareaUrgente(tareas)
-            
+
             assertNotNull(tareaUrgente)
             assertEquals(2, tareaUrgente?.id)
             assertEquals(3, tareaUrgente?.prioridad)
         }
-        
+
         @Test
         @DisplayName("Debe encontrar tarea por ID")
         fun encontrarTareaPorId() {
@@ -55,13 +47,13 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(5, "Tarea B", 2, true, listOf("test"), 2),
                 Tarea(10, "Tarea C", 3, false, listOf("test"), 3)
             )
-            
+
             val tarea = gestor.buscarPorId(tareas, 5)
-            
+
             assertNotNull(tarea)
             assertEquals("Tarea B", tarea?.titulo)
         }
-        
+
         @Test
         @DisplayName("Debe encontrar primera tarea sin completar con etiqueta específica")
         fun encontrarTareaPendienteConEtiqueta() {
@@ -72,14 +64,14 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(3, "Actualizar deps", 1, false, listOf("mantenimiento"), 1),
                 Tarea(4, "Refactoring", 2, false, listOf("desarrollo", "mejora"), 4)
             )
-            
+
             val tareaPendiente = gestor.encontrarTareaPendienteConEtiqueta(tareas, "desarrollo")
-            
+
             assertNotNull(tareaPendiente)
             assertEquals("Revisar PR", tareaPendiente?.titulo)
             assertFalse(tareaPendiente?.completada ?: true)
         }
-        
+
         @Test
         @DisplayName("Debe retornar null si no encuentra coincidencias")
         fun retornarNullSiNoEncuentra() {
@@ -88,17 +80,17 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(1, "Tarea A", 1, true, listOf("test"), 1),
                 Tarea(2, "Tarea B", 1, true, listOf("test"), 2)
             )
-            
+
             val tareaInexistente = gestor.buscarPorId(tareas, 999)
-            
+
             assertNull(tareaInexistente)
         }
     }
-    
+
     @Nested
     @DisplayName("Parte B: Operaciones con Any")
     inner class AnyOperations {
-        
+
         @Test
         @DisplayName("Debe verificar si hay tareas urgentes pendientes")
         fun verificarTareasUrgentesPendientes() {
@@ -108,12 +100,12 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(2, "Tarea urgente completada", 3, true, listOf("urgente"), 2),
                 Tarea(3, "Tarea urgente pendiente", 3, false, listOf("urgente"), 3)
             )
-            
+
             val hayUrgentesPendientes = gestor.hayTareasUrgentesPendientes(tareas)
-            
+
             assertTrue(hayUrgentesPendientes)
         }
-        
+
         @Test
         @DisplayName("Debe verificar si alguna tarea excede tiempo límite")
         fun verificarTareasExcedenTiempo() {
@@ -123,12 +115,12 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(2, "Tarea media", 2, false, listOf(), 4),
                 Tarea(3, "Tarea larga", 2, false, listOf(), 10)
             )
-            
+
             val hayTareasLargas = gestor.hayTareasQueSuperanHoras(tareas, 8)
-            
+
             assertTrue(hayTareasLargas)
         }
-        
+
         @Test
         @DisplayName("Debe verificar si existe alguna tarea con etiqueta específica")
         fun verificarExistenciaEtiqueta() {
@@ -138,19 +130,19 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(2, "Backend", 2, false, listOf("api", "database"), 4),
                 Tarea(3, "Testing", 1, false, listOf("qa", "testing"), 2)
             )
-            
+
             val hayTareasBackend = gestor.existeTareaConEtiqueta(tareas, "database")
             val hayTareasMovil = gestor.existeTareaConEtiqueta(tareas, "mobile")
-            
+
             assertTrue(hayTareasBackend)
             assertFalse(hayTareasMovil)
         }
     }
-    
+
     @Nested
     @DisplayName("Parte C: Operaciones con All")
     inner class AllOperations {
-        
+
         @Test
         @DisplayName("Debe verificar si todas las tareas están completadas")
         fun verificarTodasCompletadas() {
@@ -164,14 +156,14 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(1, "Tarea A", 1, true, listOf(), 1),
                 Tarea(2, "Tarea B", 2, false, listOf(), 2)
             )
-            
+
             val todasCompletadas = gestor.todasCompletadas(tareasCompletadas)
             val mixtasCompletadas = gestor.todasCompletadas(tareasMixtas)
-            
+
             assertTrue(todasCompletadas)
             assertFalse(mixtasCompletadas)
         }
-        
+
         @Test
         @DisplayName("Debe verificar si todas las tareas tienen etiquetas")
         fun verificarTodasTienenEtiquetas() {
@@ -181,12 +173,12 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(2, "Tarea B", 2, false, listOf("tag2", "tag3"), 2),
                 Tarea(3, "Tarea C", 3, false, listOf(), 3)
             )
-            
+
             val todasEtiquetadas = gestor.todasTienenEtiquetas(tareas)
-            
+
             assertFalse(todasEtiquetadas)
         }
-        
+
         @Test
         @DisplayName("Debe verificar si todas las tareas cumplen tiempo estimado")
         fun verificarTiempoEstimado() {
@@ -196,19 +188,19 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(2, "Tarea B", 2, false, listOf(), 3),
                 Tarea(3, "Tarea C", 3, false, listOf(), 4)
             )
-            
+
             val todasDentroLimite = gestor.todasDentroDeHoras(tareasCortas, 5)
             val todasDentroLimiteEstricto = gestor.todasDentroDeHoras(tareasCortas, 3)
-            
+
             assertTrue(todasDentroLimite)
             assertFalse(todasDentroLimiteEstricto)
         }
     }
-    
+
     @Nested
     @DisplayName("Parte D: Combinación de Find, Any y All")
     inner class CombinedOperations {
-        
+
         @Test
         @DisplayName("Debe validar proyecto listo para entrega")
         fun validarProyectoListoParaEntrega() {
@@ -219,16 +211,16 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(3, "Documentación", 2, true, listOf("docs"), 2),
                 Tarea(4, "Deploy", 3, true, listOf("devops"), 1)
             )
-            
+
             // Un proyecto está listo si:
             // - Todas las tareas de prioridad alta (3) están completadas
             // - No hay ninguna tarea pendiente con etiqueta "blocker"
             // - Existe al menos una tarea de documentación completada
             val proyectoListo = gestor.proyectoListoParaEntrega(tareasProyecto)
-            
+
             assertTrue(proyectoListo)
         }
-        
+
         @Test
         @DisplayName("Debe generar resumen de estado del proyecto")
         fun generarResumenEstado() {
@@ -239,9 +231,9 @@ class Ejercicio2FindAnyAllTest {
                 Tarea(3, "Optimización", 1, false, listOf("mejora"), 3),
                 Tarea(4, "Hotfix", 3, true, listOf("bug", "urgente"), 2)
             )
-            
+
             val resumen = gestor.generarResumenEstado(tareas)
-            
+
             // El resumen debe indicar:
             // - Si hay tareas críticas pendientes
             // - El total de horas pendientes
@@ -256,10 +248,5 @@ class Ejercicio2FindAnyAllTest {
             )
         }
     }
-    
-    data class EstadoProyecto(
-        val hayTareasCriticasPendientes: Boolean,
-        val totalHorasPendientes: Int,
-        val todosLosBugsResueltos: Boolean
-    )
+
 }

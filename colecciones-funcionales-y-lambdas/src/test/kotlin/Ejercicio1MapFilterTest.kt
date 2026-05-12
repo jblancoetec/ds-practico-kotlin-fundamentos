@@ -13,15 +13,6 @@ import org.junit.jupiter.api.Nested
  * usando map para transformaciones y filter para búsquedas.
  */
 class Ejercicio1MapFilterTest {
-    
-    data class Producto(
-        val id: Int,
-        val nombre: String,
-        val precio: Double,
-        val categoria: String,
-        val enStock: Boolean
-    )
-    
     @Nested
     @DisplayName("Parte A: Operaciones con Map")
     inner class MapOperations {

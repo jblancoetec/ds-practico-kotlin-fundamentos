@@ -14,16 +14,7 @@ import org.junit.jupiter.api.Nested
  */
 class Ejercicio3SortByLambdaTest {
     
-    data class Empleado(
-        val id: Int,
-        val nombre: String,
-        val departamento: String,
-        val salario: Double,
-        val añosExperiencia: Int,
-        val evaluacionDesempeño: Double, // 0.0 a 5.0
-        val proyectosCompletados: Int
-    )
-    
+
     @Nested
     @DisplayName("Parte A: Ordenamiento Simple con sortBy")
     inner class SimpleSorting {
@@ -58,10 +49,10 @@ class Ejercicio3SortByLambdaTest {
             
             val veteranos = sistema.ordenarPorExperienciaDesc(empleados)
             
-            assertEquals(10, veteranos[0].añosExperiencia)
-            assertEquals(7, veteranos[1].añosExperiencia)
-            assertEquals(5, veteranos[2].añosExperiencia)
-            assertEquals(3, veteranos[3].añosExperiencia)
+            assertEquals(10, veteranos[0].anosExperiencia)
+            assertEquals(7, veteranos[1].anosExperiencia)
+            assertEquals(5, veteranos[2].anosExperiencia)
+            assertEquals(3, veteranos[3].anosExperiencia)
         }
         
         @Test
@@ -190,11 +181,11 @@ class Ejercicio3SortByLambdaTest {
             
             // Los juniors (< 5 años) deben estar ordenados por evaluación
             // Los seniors (>= 5 años) deben estar ordenados por proyectos
-            val juniors = ordenadosCondicionalmente.filter { it.añosExperiencia < 5 }
-            val seniors = ordenadosCondicionalmente.filter { it.añosExperiencia >= 5 }
+            val juniors = ordenadosCondicionalmente.filter { it.anosExperiencia < 5 }
+            val seniors = ordenadosCondicionalmente.filter { it.anosExperiencia >= 5 }
             
             assertTrue(juniors.zipWithNext().all { (a, b) -> 
-                a.evaluacionDesempeño >= b.evaluacionDesempeño 
+                a.evaluacionDesempeno >= b.evaluacionDesempeno
             })
             assertTrue(seniors.zipWithNext().all { (a, b) -> 
                 a.proyectosCompletados >= b.proyectosCompletados 
@@ -222,7 +213,7 @@ class Ejercicio3SortByLambdaTest {
             }
             
             val porRendimiento = { e: Empleado ->
-                e.evaluacionDesempeño * e.proyectosCompletados
+                e.evaluacionDesempeno * e.proyectosCompletados
             }
             
             val ordenadosPorValor = sistema.ordenarConEstrategia(empleados, porValorEconomico)
@@ -249,14 +240,14 @@ class Ejercicio3SortByLambdaTest {
             // Aplicar filtro y luego ordenamiento, todo con lambdas
             val empleadosTop = sistema.obtenerTopEmpleados(
                 empleados,
-                filtro = { it.evaluacionDesempeño >= 4.0 },
-                ordenamiento = { it.salario * it.evaluacionDesempeño },
+                filtro = { it.evaluacionDesempeno >= 4.0 },
+                ordenamiento = { it.salario * it.evaluacionDesempeno },
                 limite = 2
             )
             
             assertEquals(2, empleadosTop.size)
             assertEquals("Carlos", empleadosTop[0].nombre)
-            assertTrue(empleadosTop.all { it.evaluacionDesempeño >= 4.0 })
+            assertTrue(empleadosTop.all { it.evaluacionDesempeno >= 4.0 })
         }
     }
 }
