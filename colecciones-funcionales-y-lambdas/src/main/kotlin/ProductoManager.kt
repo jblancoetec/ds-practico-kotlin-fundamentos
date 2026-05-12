@@ -30,7 +30,7 @@ class ProductoManager {
     }
 
     fun generarEtiquetas(productos: List<Producto>): List<String> {
-        TODO("Implementar: Debe generar etiquetas en formato 'nombre - $precio (estado)'")
+        TODO("Implementar: Debe generar etiquetas en formato 'nombre - \$precio (estado)'")
     }
 
     // Parte B: Operaciones con Filter
@@ -75,4 +75,3 @@ class ProductoManager {
         TODO("Implementar: Debe generar reporte de productos caros disponibles en formato especial")
     }
 }
-
