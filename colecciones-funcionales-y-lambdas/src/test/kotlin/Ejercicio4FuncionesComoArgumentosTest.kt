@@ -213,14 +213,14 @@ class Ejercicio4FuncionesComoArgumentosTest {
             val configuracionVentas = ConfiguracionProcesamiento(
                 filtro = { it.categoria == "Ventas" && it.estado == EstadoTransaccion.PROCESADA },
                 transformacion = { it.monto * 1.15 }, // Agregar 15% de ganancia
-                formateo = { "Venta procesada: $$it" }
+                formateo = { "Venta procesada: $%.1f".format(Locale.ENGLISH, it) }
             )
             
             // Configuración para análisis de gastos
             val configuracionGastos = ConfiguracionProcesamiento(
                 filtro = { it.tipo == TipoTransaccion.EGRESO },
                 transformacion = { it.monto * -1 }, // Convertir a negativo
-                formateo = { "Gasto registrado: $$it" }
+                formateo = { "Gasto registrado: $%.1f".format(Locale.ENGLISH, it)}
             )
             
             val transacciones = listOf(
