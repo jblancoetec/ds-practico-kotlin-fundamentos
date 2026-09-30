@@ -42,8 +42,8 @@ fundamentos-basicos/
 │       └── edu/etec/ds/
 │           └── fundamentos/
 │               └── *Test.kt
-├── build.gradle.kts
-├── settings.gradle.kts
+├── pom.xml
+├── mvnw / mvnw.cmd
 └── README.md
 ```
 
@@ -62,32 +62,33 @@ El práctico contiene 6 ejercicios递增:
 
 ### Requisitos Previos
 
-- JDK 17 o superior
-- Gradle 8.x (opcional si usas el wrapper)
+- JDK 21 o superior; configura `JAVA_HOME` si tienes varios JDK instalados.
+- Maven 3.9.16 se descarga mediante el wrapper; no necesitas instalarlo.
+- Ejecuta los comandos desde `fundamentos-basicos/`. En Windows usa `mvnw.cmd` en lugar de `./mvnw`.
 
 ### Ejecutar Todos los Tests
 
 ```bash
-./gradlew test
+./mvnw test
 ```
 
 ### Ejecutar Tests de un Ejercicio Específico
 
 ```bash
-./gradlew test --tests "edu.etec.ds.fundamentos.Ejercicio1Test"
+./mvnw test -Dtest=edu.etec.ds.fundamentos.Ejercicio1Test
 ```
 
-### Ver Resultados en HTML
+### Ver Resultados
 
 ```bash
-./gradlew test
-# Abrir: build/reports/tests/test/index.html
+./mvnw test
+# Reportes de texto y XML: target/surefire-reports/
 ```
 
 ### Modo Verboso
 
 ```bash
-./gradlew test --info
+./mvnw test -X
 ```
 
 ## Configuración de IDE
@@ -97,19 +98,20 @@ Se recomienda **IntelliJ IDEA** para el desarrollo, pero el proyecto es independ
 ### Pasos en IntelliJ IDEA
 
 1. File → Open → Seleccionar carpeta `fundamentos-basicos`
-2. Esperar a que Gradle sincronice el proyecto
+2. Esperar a que Maven sincronice el proyecto (`pom.xml`)
 3. Ejecutar tests desde la pestaña "Run" o con `Ctrl+Shift+F10`
 
 ## GitHub Actions
 
-El proyecto incluye un workflow de CI en `.github/workflows/ci.yml` que:
+El repositorio incluye un workflow de CI en `../.github/workflows/ci.yml` que:
 - Ejecuta los tests en cada push y pull request
 - Verifica que todos los tests pasen
-- Usa Java 17 estable
+- Usa Java 21 y Maven Wrapper
+- Los fallos por ejercicios sin implementar son esperados hasta completar el práctico
 
 ## Entrega
 
 1. Completa todos los ejercicios en orden
-2. Asegúrate de que todos los tests pasen (`./gradlew test`)
+2. Asegúrate de que todos los tests pasen (`./mvnw test`)
 3. Sube el proyecto a un repositorio GitHub
 4. Verifica que el pipeline de CI pase exitosamente

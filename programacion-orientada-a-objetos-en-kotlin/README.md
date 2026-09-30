@@ -40,8 +40,8 @@ programacion-orientada-a-objetos-en-kotlin/
 │           ├── Ejercicio1Test.kt
 │           ├── Ejercicio2Test.kt
 │           └── Ejercicio3Test.kt
-├── build.gradle.kts
-├── settings.gradle.kts
+├── pom.xml
+├── mvnw / mvnw.cmd
 └── README.md
 ```
 
@@ -76,32 +76,35 @@ Este práctico sigue estrictamente el ciclo **Red → Green → Refactor**:
 
 ### Requisitos Previos
 
-- **Java JDK 17 o superior** instalado (recomendado Java 21)
-- No necesitas instalar Gradle (el proyecto incluye Gradle Wrapper)
+- **Java JDK 21 o superior** instalado; configura `JAVA_HOME` si tienes varios JDK instalados.
+- No necesitas instalar Maven: Maven Wrapper descarga la versión 3.9.16.
+- Ejecuta los comandos desde `programacion-orientada-a-objetos-en-kotlin/`. En Windows usa `mvnw.cmd` en lugar de `./mvnw`.
 
 ### Ejecutar Todos los Tests
 
 ```bash
-./gradlew test
+./mvnw test
 ```
 
 ### Ejecutar Tests de un Ejercicio Específico
 
 ```bash
-./gradlew test --tests Ejercicio1Test
-./gradlew test --tests Ejercicio2Test
-./gradlew test --tests Ejercicio3Test
+./mvnw test -Dtest=Ejercicio1Test
+./mvnw test -Dtest=Ejercicio2Test
+./mvnw test -Dtest=Ejercicio3Test
 ```
+
+Maven compila todos los tests antes de aplicar el filtro. Mientras falte alguna clase (`Estudiante`, `CuentaBancaria` o `Producto`), incluso una ejecución filtrada fallará en compilación.
 
 ### Ver el Reporte de Tests
 
 Después de ejecutar los tests, puedes ver un reporte detallado en:
 
 ```
-build/reports/tests/test/index.html
+target/surefire-reports/
 ```
 
-Abre este archivo en tu navegador para una vista completa de los resultados.
+Los reportes de texto y XML se generan cuando los tests logran compilar y ejecutarse.
 
 ## Descripción de los Ejercicios
 
@@ -149,9 +152,9 @@ Abre este archivo en tu navegador para una vista completa de los resultados.
 
 ## Integración Continua (CI)
 
-Este proyecto está configurado con **GitHub Actions** para ejecutar los tests automáticamente en cada `push` o `pull request`.
+El workflow `../.github/workflows/ci.yml` del repositorio ejecuta los tres prácticos con **GitHub Actions**, Java 21 y Maven Wrapper en cada `push` o `pull request` a las ramas configuradas.
 
-El pipeline fallará si algún test no pasa, garantizando la calidad del código.
+El pipeline fallará mientras falten las clases o haya tests que no pasen; esto es esperado en la etapa inicial de TDD.
 
 ## Recursos Adicionales
 
@@ -164,10 +167,10 @@ El pipeline fallará si algún test no pasa, garantizando la calidad del código
 
 Si encuentras problemas técnicos con la configuración del proyecto:
 
-1. Verifica que tienes Java 17+ instalado: `java -version`
+1. Verifica que tienes Java 21+ instalado: `java -version` y `./mvnw --version`
 2. Asegúrate de estar en el directorio raíz del proyecto
-3. Limpia el proyecto: `./gradlew clean`
-4. Vuelve a ejecutar los tests: `./gradlew test`
+3. Limpia el proyecto: `./mvnw clean`
+4. Vuelve a ejecutar los tests: `./mvnw test`
 
 ---
 

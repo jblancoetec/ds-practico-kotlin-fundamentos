@@ -36,7 +36,8 @@ Este trabajo práctico tiene como objetivo introducir y evaluar el dominio de la
 
 ```
 colecciones-funcionales-y-lambdas/
-├── build.gradle.kts
+├── pom.xml
+├── mvnw / mvnw.cmd
 ├── src/
 │   ├── main/
 │   │   └── kotlin/
@@ -102,48 +103,55 @@ Construye `UsuarioBuilder` utilizando scope functions y el parámetro implícito
 ## Instrucciones de Ejecución
 
 ### Requisitos Previos
-- Java 17 o superior
-- Gradle 8.0 o superior (se incluye wrapper)
+- JDK 21 o superior; configura `JAVA_HOME` si tienes varios JDK instalados.
+- Maven 3.9.16 se descarga mediante el wrapper; no necesitas instalarlo.
+- Ejecuta los comandos desde `colecciones-funcionales-y-lambdas/`.
 
 ### Ejecutar Tests Localmente
 
-#### Usando Gradle Wrapper (Recomendado)
+#### Usando Maven Wrapper (Recomendado)
 
 **Linux/Mac:**
 ```bash
-./gradlew test
+./mvnw test
 ```
 
 **Windows:**
 ```cmd
-gradlew.bat test
+mvnw.cmd test
 ```
 
 #### Ejecutar tests específicos
 
 Para ejecutar solo los tests de un ejercicio:
 ```bash
-./gradlew test --tests "Ejercicio1MapFilterTest"
+./mvnw test '-Dtest=Ejercicio1MapFilterTest*'
 ```
 
 Para ejecutar un test específico:
 ```bash
-./gradlew test --tests "Ejercicio1MapFilterTest.obtenerNombresDeProductos"
+./mvnw test '-Dtest=Ejercicio1MapFilterTest$MapOperations#obtenerNombresDeProductos'
 ```
+
+El comodín incluye las clases JUnit `@Nested`. En PowerShell usa comillas simples; en CMD, comillas dobles.
+
+**Estado inicial:** `Ejercicio4FuncionesComoArgumentosTest.kt` usa `Locale` sin importar `java.util.Locale`. Ese error existente bloquea la compilación de todos los tests, incluso al filtrar otro ejercicio. No es un problema de dependencias de Maven; consulta al docente antes de modificar los tests proporcionados.
 
 #### Ver reporte detallado
 
 Los reportes de tests se generan en:
 ```
-build/reports/tests/test/index.html
+target/surefire-reports/
 ```
 
 ### Verificar Progreso
 
 Para ver un resumen del estado de los tests:
 ```bash
-./gradlew test --info
+./mvnw test
 ```
+
+Los reportes son archivos de texto y XML. El workflow `../.github/workflows/ci.yml` ejecuta los tres prácticos con Java 21 y Maven Wrapper; fallará hasta implementar los ejercicios.
 
 ## Criterios de Evaluación
 

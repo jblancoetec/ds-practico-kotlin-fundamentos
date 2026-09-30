@@ -20,7 +20,7 @@ workspace.xml
 /js/js.translator/testData/out/
 /js/js.translator/testData/out-min/
 /js/js.translator/testData/out-pir/
-.gradle/
+target/
 build/
 !**/src/**/build
 !**/test/**/build
@@ -30,7 +30,6 @@ build/
 .idea/
 .idea/artifacts
 .idea/remote-targets.xml
-.idea/libraries/Gradle*.xml
 .idea/libraries/Maven*.xml
 .idea/modules
 .idea/runConfigurations/JPS_*.xml
@@ -39,7 +38,6 @@ build/
 .idea/runConfigurations/_MT_*.xml
 .idea/libraries
 .idea/modules.xml
-.idea/gradle.xml
 .idea/compiler.xml
 .idea/inspectionProfiles/profiles_settings.xml
 .idea/.name

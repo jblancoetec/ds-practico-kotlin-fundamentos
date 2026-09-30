@@ -8,7 +8,7 @@ git clone <url-del-repositorio>
 cd programacion-orientada-a-objetos-en-kotlin
 
 # Verificar que los tests fallen (esto es CORRECTO en TDD)
-./gradlew test
+./mvnw test
 ```
 
 Deberías ver errores de compilación que dicen `Unresolved reference 'Estudiante'`, `Unresolved reference 'CuentaBancaria'`, etc. **Esto es esperado y correcto**.
@@ -38,10 +38,10 @@ Basándote en los tests, implementa la clase `Estudiante`. Necesitas:
 ### 2.4 Verificar
 
 ```bash
-./gradlew test --tests Ejercicio1Test
+./mvnw test -Dtest=Ejercicio1Test
 ```
 
-Todos los tests del Ejercicio 1 deberían pasar (en verde).
+El filtro solo se aplica después de compilar todos los tests. Si todavía faltan `CuentaBancaria` o `Producto`, habrá errores de compilación aunque filtres por `Ejercicio1Test`; completa las clases según los tests sin modificar estos últimos.
 
 ## Paso 3: Ejercicio 2 - CuentaBancaria
 
@@ -67,7 +67,7 @@ Según los tests, necesitas:
 ### 3.4 Verificar
 
 ```bash
-./gradlew test --tests Ejercicio2Test
+./mvnw test -Dtest=Ejercicio2Test
 ```
 
 ## Paso 4: Ejercicio 3 - Producto (Data Class)
@@ -95,7 +95,7 @@ La data class generará automáticamente `toString()`, `equals()`, `hashCode()` 
 ### 4.4 Verificar
 
 ```bash
-./gradlew test --tests Ejercicio3Test
+./mvnw test -Dtest=Ejercicio3Test
 ```
 
 ## Paso 5: Verificación Final
@@ -103,7 +103,7 @@ La data class generará automáticamente `toString()`, `equals()`, `hashCode()` 
 Ejecuta todos los tests juntos:
 
 ```bash
-./gradlew test
+./mvnw test
 ```
 
 Si todos los tests están en verde, **¡felicitaciones!** Has completado el trabajo práctico.
@@ -154,18 +154,19 @@ data class NombreClase(
 
 ```bash
 # Asegúrate de tener permisos de ejecución
-chmod +x gradlew
+chmod +x mvnw
 
 # Limpia y vuelve a intentar
-./gradlew clean test
+./mvnw clean test
 ```
 
 ### Error de Java
 
-Asegúrate de tener Java 17 o superior:
+Asegúrate de tener JDK 21 o superior y que `JAVA_HOME` apunte a él:
 
 ```bash
 java -version
+./mvnw --version
 ```
 
 ### Error de compilación en las clases

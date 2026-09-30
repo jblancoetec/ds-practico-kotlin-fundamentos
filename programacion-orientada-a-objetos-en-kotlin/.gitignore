@@ -1,7 +1,5 @@
-# Gradle
-.gradle/
-build/
-!gradle/wrapper/gradle-wrapper.jar
+# Maven
+target/
 
 # IntelliJ IDEA
 .idea/
@@ -38,7 +36,3 @@ bin/
 *.bak
 *.swp
 *~
-
-# Test reports
-build/reports/
-build/test-results/
